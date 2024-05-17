@@ -14,17 +14,18 @@ public class Dealership {
 
     double maxPrice;
 
-    public Dealership() {
+
+    List<Vehicle> allVehicles;
+
+    public Dealership(){
 
     }
-
-
-    List<Vehicle> allVehicles = DealerShipFileManager.readFile();
 
     public Dealership(String name, String address, String phone) {
         this.name = name;
         this.address = address;
         this.phone = phone;
+        allVehicles = new ArrayList<Vehicle>();
     }
 
 
@@ -35,20 +36,28 @@ public class Dealership {
             if (minPrice <= vehicle.getPrice() && MixPrice >= vehicle.getPrice()) {
                 byPrice.add(vehicle);
             }
-            ;
         }
         return byPrice;
     }
 
-    List<Vehicle> getVehiclesByYear(int minYear , int MixYear) {
+    List<Vehicle> getVehiclesByMakeModel(String model){
+        List<Vehicle> byModel = new LinkedList<>();
+        for (Vehicle vehicle : allVehicles) {
+            if (model.equalsIgnoreCase(vehicle.getModel())) {
+                byModel.add(vehicle);
+            }
+        }
+        return byModel;
+    }
+
+    List<Vehicle> getVehiclesByYear(int minYear , int mixYear) {
 //        int minYear = 1995, MixYear = 2012;
         List<Vehicle> byYear = new LinkedList<>();
         for (Vehicle vehicle : allVehicles) {
-            if (minYear <= vehicle.getYear() && MixYear >= vehicle.getYear()) {
+            if (minYear <= vehicle.getYear() && mixYear >= vehicle.getYear()) {
                 byYear.add(vehicle);
                 System.out.println("Year is  " + byYear.toString());
             }
-            ;
         }
         return byYear;
     }
@@ -58,7 +67,7 @@ public class Dealership {
         for (Vehicle vehicle : allVehicles) {
             if (color == vehicle.getColor()) {
                 byColor.add(vehicle);
-            };
+            }
         }
         return byColor;
     }
@@ -69,28 +78,26 @@ public class Dealership {
             if (minMile <= vehicle.getOdometer() && maxMile >= vehicle.getOdometer()) {
                 byMile.add(vehicle);
             }
-            ;
         }
         return byMile;
     }
 
-    List<Vehicle> getVehiclesByType(String byTpye) {
+    List<Vehicle> getVehiclesByType(String byType) {
 
-        List<Vehicle> byType = new LinkedList<>();
+        List<Vehicle> VehiclesByType = new LinkedList<>();
         for (Vehicle vehicle : allVehicles) {
-            if (byTpye == vehicle.getVehicleType()) {
-                byType.add(vehicle);
-                System.out.println("SUV is  " + byType.toString());
+            if (VehiclesByType.equals(vehicle.getVehicleType())) {
+                VehiclesByType.add(vehicle);
+                //System.out.println("SUV is  " + byType.toString());
             }
-            ;
         }
-        return byType;
+        return VehiclesByType;
     }
 
     // Get all vehicles
     List<Vehicle> getAllVehicles() {
         for (Vehicle Vehicle : allVehicles) {
-            System.out.println(Vehicle.toString());
+            //System.out.println(Vehicle.toString());
         }
         return allVehicles;
     }
@@ -99,7 +106,6 @@ public class Dealership {
         System.out.println(vehicle4.toString());
         allVehicles.add(vehicle4);
     }
-
     public synchronized  void removeVehicle(String vehicleType) {
 //        Iterator<Vehicle> vehicles = allVehicles.iterator();
 //

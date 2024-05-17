@@ -23,10 +23,6 @@ public class Vehicle {
         this.price = price;
     }
 
-//    public static boolean isEmpty() {
-//        return false;
-//    }
-
     public int getVin() {
         return vin;
     }
